@@ -5,9 +5,39 @@ import { Input } from "@/components/ui/input"
 import { Sword, Shield, Droplet, Gem, Map, User, Scroll } from "lucide-react"
 import Image from "next/image"
 
-export default function HomePage() {
+export function Marketplace() {
   return (
     <div className="min-h-screen bg-purple-900 text-gray-100 flex flex-col">
+      <header className="p-4 flex justify-between items-center bg-gray-900">
+        <div className="flex items-center">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/parallelao_secret_shop_logo_with_transparent_background_for_web_7a100720-0f57-43e0-99fb-19005bc2f0f7-removebg-preview-ra5HtqZGEFU2MOJwZGdUF9ocEosI5c.png"
+            alt="Secret Shop Logo"
+            width={100}
+            height={100}
+            className="mr-2"
+          />
+        </div>
+        <nav className="space-x-4">
+          {[
+            { name: "Home", emoji: "🏠" },
+            { name: "Marketplace", emoji: "🛒" },
+            { name: "Gather", emoji: "🌿" },
+            { name: "Crafting", emoji: "⚒️" },
+            { name: "Relic Hunter", emoji: "🏺" },
+            { name: "Quests", emoji: "📜" },
+            { name: "Profile", emoji: "👤" },
+          ].map((item) => (
+            <Button key={item.name} variant="ghost" className="text-gray-300 hover:text-pink-400 hover:bg-gray-800">
+              <span>{item.emoji} {item.name}</span>
+            </Button>
+          ))}
+        </nav>
+        <Button variant="outline" className="text-pink-500 border-pink-500 hover:bg-pink-500 hover:text-gray-900">
+          Connect Wallet
+        </Button>
+      </header>
+
       <main className="container mx-auto p-8 flex-grow">
         <section className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-4 text-pink-400">
@@ -94,6 +124,54 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      <footer className="bg-gray-900 text-gray-400 py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-gray-100">Secret Shop</h4>
+              <p>Your mystical marketplace for legendary items and rare artifacts.</p>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-gray-100">Quick Links</h4>
+              <ul className="space-y-2">
+                {["About Us", "Terms of Service", "Privacy Policy", "Contact Us"].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="hover:text-pink-400 transition-colors duration-300">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-gray-100">Community</h4>
+              <ul className="space-y-2">
+                {["Guild Hall", "Adventurers' Discord", "Lore Compendium", "Support"].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="hover:text-pink-400 transition-colors duration-300">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-gray-100">Follow the Quest</h4>
+              <div className="flex space-x-4">
+                {["Facebook", "Twitter", "Instagram", "Youtube"].map((item) => (
+                  <a key={item} href="#" className="text-gray-400 hover:text-pink-400 transition-colors duration-300">
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-800 text-center">
+            <p>&copy; 2024 Secret Shop. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
