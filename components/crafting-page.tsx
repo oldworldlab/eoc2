@@ -2,13 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Progress } from '@/components/ui/progress'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Hammer, Scissors, Beaker, Axe, Flame, Gem, Feather, Star } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
@@ -56,16 +53,23 @@ const getTierColor = (tier: number) => {
   }
 }
 
+interface Item {
+  name: string;
+  category: string;
+  tier: number;
+  resources: string[];
+}
+
 export function CraftingPageComponent() {
   const [activeTable, setActiveTable] = useState(CRAFTING_TABLES[0].name)
   const [craftingProgress, setCraftingProgress] = useState(0)
-  const [craftingItem, setCraftingItem] = useState(null)
-  const [inventory, setInventory] = useState({})
-  const [relics, setRelics] = useState({})
+  const [craftingItem, setCraftingItem] = useState<Item | null>(null)
+  const [inventory, setInventory] = useState<Record<string, number>>({})
+  const [relics, setRelics] = useState<Record<string, number>>({})
 
   useEffect(() => {
     // Initialize inventory and relics
-    const initInventory = {}
+    const initInventory: { [key: string]: number } = {}
     ITEMS.forEach(item => {
       item.resources.forEach(resource => {
         initInventory[resource] = Math.floor(Math.random() * 10)
@@ -73,14 +77,14 @@ export function CraftingPageComponent() {
     })
     setInventory(initInventory)
 
-    const initRelics = {}
+    const initRelics: { [key: string]: number } = {}
     RELICS.forEach(relic => {
       initRelics[relic] = Math.floor(Math.random() * 3)
     })
     setRelics(initRelics)
   }, [])
 
-  const handleCraft = (item) => {
+  const handleCraft = (item: Item) => {
     if (canCraft(item)) {
       setCraftingItem(item)
       setCraftingProgress(0)
@@ -99,18 +103,20 @@ export function CraftingPageComponent() {
     }
   }
 
-  const canCraft = (item) => {
-    return item.resources.every(resource => inventory[resource] > 0) && Object.values(relics).some(count => count > 0)
+  const canCraft = (item: Item) => {
+    return item.resources.every((resource: string) => inventory[resource] > 0) && Object.values(relics).some(count => count > 0)
   }
 
-  const completeCrafting = (item) => {
+  const completeCrafting = (item: Item) => {
     const newInventory = { ...inventory }
-    item.resources.forEach(resource => {
+    item.resources.forEach((resource: string) => {
       newInventory[resource]--
     })
     const usedRelic = Object.keys(relics).find(relic => relics[relic] > 0)
     const newRelics = { ...relics }
-    newRelics[usedRelic]--
+    if (usedRelic) {
+      newRelics[usedRelic]--
+    }
     setInventory(newInventory)
     setRelics(newRelics)
     setCraftingItem(null)

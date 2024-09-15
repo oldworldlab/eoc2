@@ -6,12 +6,9 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { 
-  Diamond, Trees, Pickaxe, 
   Download, Play, Info, Sword, Shield, 
   Heart, Zap, Brain, Feather
 } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
 
 // Mock data for the character
 const characterData = {

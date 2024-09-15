@@ -6,22 +6,23 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Axe, Pickaxe, Fishing, Mortar, Trees, Mountain, Water, Herb } from 'lucide-react'
+import { Axe, Pickaxe, Fish, Beaker, Trees, Mountain, Leaf } from 'lucide-react'
 
 const GATHERING_TYPES = [
   { name: 'Woodcutting', icon: <Trees className="w-6 h-6" />, materials: ['Oak Log', 'Pine Log', 'Maple Log', 'Yew Log'] },
   { name: 'Mining', icon: <Mountain className="w-6 h-6" />, materials: ['Copper Ore', 'Iron Ore', 'Silver Ore', 'Gold Ore'] },
-  { name: 'Fishing', icon: <Water className="w-6 h-6" />, materials: ['Trout', 'Salmon', 'Tuna', 'Swordfish'] },
-  { name: 'Herbalism', icon: <Herb className="w-6 h-6" />, materials: ['Lavender', 'Sage', 'Thyme', 'Mandrake'] },
+  { name: 'Fishing', icon: <Fish className="w-6 h-6" />, materials: ['Trout', 'Salmon', 'Tuna', 'Swordfish'] },
+  { name: 'Herbalism', icon: <Leaf className="w-6 h-6" />, materials: ['Lavender', 'Sage', 'Thyme', 'Mandrake'] },
+  { name: 'Alchemy', icon: <Beaker className="w-6 h-6" />, materials: ['Herbs', 'Magical Essence'] },
 ]
 
 export function Page() {
-  const [activeGathering, setActiveGathering] = useState(null)
+  const [activeGathering, setActiveGathering] = useState<string | null>(null)
   const [progress, setProgress] = useState(0)
-  const [inventory, setInventory] = useState({})
+  const [inventory, setInventory] = useState<Record<string, number>>({})
 
   useEffect(() => {
-    let interval
+    let interval: NodeJS.Timeout
     if (activeGathering) {
       interval = setInterval(() => {
         setProgress((prevProgress) => {
@@ -37,13 +38,23 @@ export function Page() {
     return () => clearInterval(interval)
   }, [activeGathering])
 
-  const startGathering = (type) => {
+  useEffect(() => {
+    const initInventory: { [key: string]: number } = {}
+    GATHERING_TYPES.forEach((type) => {
+      type.materials.forEach((material) => {
+        initInventory[material] = Math.floor(Math.random() * 10)
+      })
+    })
+    setInventory(initInventory)
+  }, [])
+
+  const startGathering = (type: string) => {
     setActiveGathering(type)
     setProgress(0)
   }
 
-  const gatherMaterial = (type) => {
-    const materials = GATHERING_TYPES.find(t => t.name === type).materials
+  const gatherMaterial = (type: string) => {
+    const materials = GATHERING_TYPES.find(t => t.name === type)?.materials || []
     const gatheredMaterial = materials[Math.floor(Math.random() * materials.length)]
     setInventory(prev => ({
       ...prev,
@@ -53,12 +64,13 @@ export function Page() {
     console.log(`Gathered ${gatheredMaterial}. This would be recorded on the blockchain.`)
   }
 
-  const getGatheringIcon = (type) => {
+  const getGatheringIcon = (type: string) => {
     switch (type) {
       case 'Woodcutting': return <Axe className="w-6 h-6" />
       case 'Mining': return <Pickaxe className="w-6 h-6" />
-      case 'Fishing': return <Fishing className="w-6 h-6" />
-      case 'Herbalism': return <Mortar className="w-6 h-6" />
+      case 'Fishing': return <Fish className="w-6 h-6" />
+      case 'Herbalism': return <Leaf className="w-6 h-6" />
+      case 'Alchemy': return <Beaker className="w-6 h-6" />
       default: return null
     }
   }
@@ -108,7 +120,7 @@ export function Page() {
               <CardFooter>
                 <Button
                   onClick={() => startGathering(type.name)}
-                  disabled={activeGathering && activeGathering !== type.name}
+                  disabled={!!activeGathering && activeGathering !== type.name}
                   className="w-full bg-purple-600 text-white hover:bg-purple-700 disabled:bg-gray-600"
                 >
                   {activeGathering === type.name ? 'Gathering...' : 'Start Gathering'}
@@ -121,7 +133,7 @@ export function Page() {
       <Card className="mt-8 bg-gray-800 border-purple-700">
         <CardHeader>
           <CardTitle className="text-purple-400">Your Inventory</CardTitle>
-          <CardDescription className="text-gray-400">Resources you've gathered</CardDescription>
+          <CardDescription className="text-gray-400">Resources you&apos;ve gathered</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

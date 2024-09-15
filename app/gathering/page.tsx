@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -48,7 +48,6 @@ export default function Gather() {
   const [inventory, setInventory] = useState<Record<string, number>>({})
   const [gatheringResources, setGatheringResources] = useState<GatheringResource[]>([])
   const [activeTab, setActiveTab] = useState<GatheringMethod>(GATHERING_TYPES[0].name)
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function fetchResources() {
@@ -64,12 +63,20 @@ export default function Gather() {
       } catch (error) {
         console.error('Error fetching gathering resources:', error);
         setGatheringResources([]);
-      } finally {
-        setIsLoading(false);
       }
     }
     fetchResources();
   }, [])
+
+  const gatherMaterial = useCallback((method: GatheringMethod) => {
+    const resource = gatheringResources.find(res => res.gatheringMethod === method)
+    if (resource) {
+      setInventory(prevInventory => ({
+        ...prevInventory,
+        [resource.resourceName]: (prevInventory[resource.resourceName] || 0) + resource.baseGatherRate
+      }))
+    }
+  }, [gatheringResources])
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null
@@ -90,19 +97,16 @@ export default function Gather() {
     }
   }, [activeGathering, gatherMaterial])
 
-  function gatherMaterial(method: GatheringMethod) {
-    const resource = gatheringResources.find(res => res.gatheringMethod === method)
-    if (resource) {
-      setInventory(prevInventory => ({
-        ...prevInventory,
-        [resource.resourceName]: (prevInventory[resource.resourceName] || 0) + resource.baseGatherRate
-      }))
-    }
-  }
-
   function startGathering(method: GatheringMethod) {
     setActiveGathering(method)
     setProgress(0)
+  }
+
+  function handleTabChange(value: string) {
+    const method = GATHERING_TYPES.find(type => type.name === value)?.name
+    if (method) {
+      setActiveTab(method)
+    }
   }
 
   return (
@@ -110,7 +114,7 @@ export default function Gather() {
       <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
         Gathering
       </h1>
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid w-full grid-cols-5 bg-gray-800">
           {GATHERING_TYPES.map((type) => (
             <TabsTrigger
@@ -183,7 +187,7 @@ export default function Gather() {
       <Card className={`${darkFantasyStyles.card} ${darkFantasyStyles.glowBorder}`}>
         <CardHeader>
           <CardTitle className={darkFantasyStyles.accent}>Your Inventory</CardTitle>
-          <CardDescription className={darkFantasyStyles.text}>Resources you've gathered</CardDescription>
+          <CardDescription className={darkFantasyStyles.text}>Resources you&apos;ve gathered</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

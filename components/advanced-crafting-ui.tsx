@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Progress } from "@/components/ui/progress"
-import { Hammer, Feather, Beaker, Scissors, Tree, ShieldQuestion, Star } from "lucide-react"
+import { Hammer, Feather, Beaker, Scissors, Trees, ShieldQuestion, Star } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const darkFantasyStyles = {
@@ -26,7 +26,7 @@ const craftingDisciplines = [
   { name: "Blacksmithing", icon: Hammer },
   { name: "Leatherworking", icon: Scissors },
   { name: "Tailoring", icon: Feather },
-  { name: "Woodworking", icon: Tree },
+  { name: "Woodworking", icon: Trees },
   { name: "Alchemy", icon: Beaker },
   { name: "Enchanting", icon: ShieldQuestion },
 ]
@@ -48,13 +48,19 @@ const qualityTiers = [
   { name: "Masterpiece", color: "text-yellow-500" },
 ]
 
+interface CraftedItem {
+  name: string;
+  quality: { name: string; color: string };
+  tier: number;
+}
+
 export function AdvancedCraftingUi() {
   const [selectedDiscipline, setSelectedDiscipline] = useState(craftingDisciplines[0].name)
   const [selectedTier, setSelectedTier] = useState(1)
   const [selectedResources, setSelectedResources] = useState(["", "", ""])
   const [craftingProgress, setCraftingProgress] = useState(0)
   const [isCrafting, setIsCrafting] = useState(false)
-  const [craftedItem, setCraftedItem] = useState(null)
+  const [craftedItem, setCraftedItem] = useState<CraftedItem | null>(null)
 
   const handleResourceChange = (index: number, value: string) => {
     const newResources = [...selectedResources]
@@ -70,8 +76,9 @@ export function AdvancedCraftingUi() {
   }
 
   useEffect(() => {
+    let interval: NodeJS.Timeout
     if (isCrafting) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setCraftingProgress(prev => {
           if (prev >= 100) {
             clearInterval(interval)
@@ -95,8 +102,8 @@ export function AdvancedCraftingUi() {
           return prev + 2
         })
       }, 50)
-      return () => clearInterval(interval)
     }
+    return () => clearInterval(interval)
   }, [isCrafting, selectedDiscipline, selectedTier])
 
   return (

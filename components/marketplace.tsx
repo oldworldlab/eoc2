@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import Image from 'next/image'
 
 export function Marketplace() {
   return (
@@ -12,7 +13,13 @@ export function Marketplace() {
       <header className="border-b border-[#1a1f2e] p-4">
         <nav className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-8">
-            <img src="/placeholder.svg?height=40&width=40" alt="Secret Shop Logo" className="h-10 w-10" />
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/parallelao_secret_shop_logo_with_transparent_background_for_web_7a100720-0f57-43e0-99fb-19005bc2f0f7-removebg-preview-ra5HtqZGEFU2MOJwZGdUF9ocEosI5c.png"
+              alt="Secret Shop Logo"
+              width={100}
+              height={100}
+              className="mr-2"
+            />
             <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700] hover:bg-[#1a1f2e]">
               <Diamond className="mr-2 h-4 w-4" />
               Home
@@ -55,11 +62,13 @@ export function Marketplace() {
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
-          <Select className="bg-[#1a1f2e] border-[#2a2f3e] text-gray-100">
-            <option>Recommended for you</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-          </Select>
+          <div className="bg-[#1a1f2e] border-[#2a2f3e] text-gray-100 w-full">
+            <Select>
+              <option>Recommended for you</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+            </Select>
+          </div>
         </div>
         <div className="flex mb-6">
           <div className="w-1/4 pr-6 border-r border-[#1a1f2e]">
@@ -110,7 +119,7 @@ export function Marketplace() {
             <div className="grid grid-cols-4 gap-4">
               {[...Array(16)].map((_, i) => (
                 <div key={i} className="bg-[#1a1f2e] p-4 rounded-lg border border-[#2a2f3e] hover:border-[#ffd700] transition-colors">
-                  <img src={`/placeholder.svg?height=100&width=100`} alt="Item" className="w-full h-40 object-cover mb-4 rounded" />
+                  <Image src={`/placeholder.svg?height=100&width=100`} alt="Item" className="w-full h-40 object-cover mb-4 rounded" width={100} height={100} />
                   <h3 className="text-lg font-semibold mb-2">Mystic Artifact</h3>
                   <p className="text-gray-400 mb-2">Rare | Accessory</p>
                   <div className="flex justify-between items-center">

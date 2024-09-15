@@ -23,7 +23,8 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@components/*": ["components/*"]
     },
     "typeRoots": [
       "./node_modules/@types",
