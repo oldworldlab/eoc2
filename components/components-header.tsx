@@ -44,7 +44,7 @@ export default function HeaderComponent() {
       <nav className="space-x-4">
         {[
           { name: "Home", emoji: "🏠", href: "/" },
-          { name: "Marketplace", emoji: "🛒", href: "/marketplace" }, // Added Marketplace
+          { name: "Marketplace", emoji: "🛒", href: "/marketplace" },
           { name: "Gather", emoji: "🌿", href: "/gathering" },
           { name: "Crafting", emoji: "⚒️", href: "/crafting" },
           { name: "Relic Hunter", emoji: "🏺", href: "/relic-hunter" },

@@ -1,17 +1,13 @@
-'use client'
-
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { 
-  Diamond, Trees, Pickaxe, 
-  Download, Play, Info, Sword, Shield, 
-  Heart, Zap, Brain, Feather
+  Diamond, Trees, Wheat, Scissors, Flask, Pickaxe, 
+  Download, Play, RotateCcw, Info, Sword, Shield, 
+  Heart, Zap, Brain, Feather, Wallet, Settings, LogOut
 } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
 
 // Mock data for the character
 const characterData = {
@@ -78,6 +74,37 @@ export default function UserProfile() {
 
   return (
     <div className="min-h-screen bg-[#0a0e17] text-gray-100 font-sans">
+      <header className="bg-[#1a1f2e] border-b border-[#2a2f3e] p-4">
+        <nav className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center space-x-8">
+            <img src="/placeholder.svg?height=40&width=40" alt="Secret Shop Logo" className="h-10 w-10" />
+            <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
+              <Diamond className="mr-2 h-4 w-4" />
+              Home
+            </Button>
+            <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
+              <Pickaxe className="mr-2 h-4 w-4" />
+              Marketplace
+            </Button>
+            <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
+              <Trees className="mr-2 h-4 w-4" />
+              Gather
+            </Button>
+            <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
+              <Flask className="mr-2 h-4 w-4" />
+              Crafting
+            </Button>
+            <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
+              <Sword className="mr-2 h-4 w-4" />
+              Quests
+            </Button>
+          </div>
+          <Button className="bg-[#ffd700] text-[#0a0e17] hover:bg-[#ffea00]">
+            Connect Wallet
+          </Button>
+        </nav>
+      </header>
+
       <main className="p-6 max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center text-[#ffd700]">Adventurer Profile</h1>
 
@@ -267,7 +294,7 @@ export default function UserProfile() {
               )}
               <div className="flex space-x-4">
                 {!isDownloaded ? (
-                  <Button
+                  <Button 
                     className="flex-1 bg-[#ffd700] text-[#0a0e17] hover:bg-[#ffea00] flex items-center justify-center"
                     onClick={handleDownload}
                     disabled={downloadProgress > 0}
@@ -276,7 +303,7 @@ export default function UserProfile() {
                     {downloadProgress === 0 ? 'Download Game' : 'Downloading...'}
                   </Button>
                 ) : (
-                  <Button
+                  <Button 
                     className="flex-1 bg-[#ffd700] text-[#0a0e17] hover:bg-[#ffea00] flex items-center justify-center"
                     onClick={handleLaunch}
                     disabled={isLaunching}

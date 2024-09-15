@@ -8,15 +8,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Progress } from "@/components/ui/progress"
-import { Hammer, Feather, Beaker, Scissors, Trees, ShieldQuestion, Star } from "lucide-react"
+import { Hammer, Feather, Beaker, Scissors, Tree, ShieldQuestion, Star } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { darkFantasyStyles } from '@/components/DarkFantasyLayout'
+
+const darkFantasyStyles = {
+  background: "bg-gray-900",
+  text: "text-gray-300",
+  heading: "text-gray-100",
+  accent: "text-yellow-500",
+  accentHover: "hover:text-yellow-400",
+  button: "bg-gray-800 hover:bg-gray-700 text-yellow-500 border border-yellow-500",
+  card: "bg-gray-800 border border-gray-700",
+  glowBorder: "border border-yellow-500 shadow-lg shadow-yellow-500/50",
+}
 
 const craftingDisciplines = [
   { name: "Blacksmithing", icon: Hammer },
   { name: "Leatherworking", icon: Scissors },
   { name: "Tailoring", icon: Feather },
-  { name: "Woodworking", icon: Trees },
+  { name: "Woodworking", icon: Tree },
   { name: "Alchemy", icon: Beaker },
   { name: "Enchanting", icon: ShieldQuestion },
 ]
@@ -38,13 +48,13 @@ const qualityTiers = [
   { name: "Masterpiece", color: "text-yellow-500" },
 ]
 
-export default function AdvancedCraftingUI() {
+export function AdvancedCraftingUi() {
   const [selectedDiscipline, setSelectedDiscipline] = useState(craftingDisciplines[0].name)
   const [selectedTier, setSelectedTier] = useState(1)
   const [selectedResources, setSelectedResources] = useState(["", "", ""])
   const [craftingProgress, setCraftingProgress] = useState(0)
   const [isCrafting, setIsCrafting] = useState(false)
-  const [craftedItem, setCraftedItem] = useState<{ name: string; quality: { name: string; color: string }; tier: number } | null>(null)
+  const [craftedItem, setCraftedItem] = useState(null)
 
   const handleResourceChange = (index: number, value: string) => {
     const newResources = [...selectedResources]

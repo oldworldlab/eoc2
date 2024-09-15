@@ -1,11 +1,24 @@
-export type ArmorMaterial = 'Cloth' | 'Leather' | 'Plate' | 'Chain';
-export type ArmorPart = 'Chest' | 'Legs' | 'Gloves' | 'Hood' | 'Boots';
-export type WeaponType =
-  | 'Axe'
-  | 'Dual Axes'
-  | 'Sword'
-  | 'Frost Staff'
-  | 'Fire Staff'
-  | 'Holy Staff'
-  | 'Bow'
-  | 'Crossbow';
+export enum ItemType {
+  Weapon = 'Weapon',
+  Armor = 'Armor',
+  Potion = 'Potion',
+  Food = 'Food',
+  Material = 'Material',
+  Relic = 'Relic',
+}
+
+export enum ArmorType {
+  Helmet = 'Helmet',
+  Chestplate = 'Chestplate',
+  Leggings = 'Leggings',
+  Boots = 'Boots',
+  Gloves = 'Gloves',
+}
+
+export enum WeaponType {
+  Sword = 'Sword',
+  Axe = 'Axe',
+  Bow = 'Bow',
+  Staff = 'Staff',
+  Dagger = 'Dagger',
+}
