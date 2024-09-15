@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Axe, Pickaxe, Scissors, Beaker, Trees, Mountain, Droplet, Leaf } from 'lucide-react'
+import { Pickaxe, Trees, Scissors, Beaker, Leaf } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { ItemTier } from '@/constants/item-tiers'
@@ -88,64 +88,34 @@ export default function Gather() {
     return () => {
       if (interval) clearInterval(interval)
     }
-  }, [activeGathering])
+  }, [activeGathering, gatherMaterial])
 
-  useEffect(() => {
-    setActiveGathering(null)
-    setProgress(0)
-  }, [activeTab])
-
-  const startGathering = (type: GatheringMethod) => {
-    setActiveGathering(type)
-    setProgress(0)
-  }
-
-  const gatherMaterial = (type: GatheringMethod) => {
-    const availableResources = gatheringResources.filter(r => r.gatheringMethod === type)
-    if (availableResources.length > 0) {
-      const gatheredResource = availableResources[Math.floor(Math.random() * availableResources.length)]
-      setInventory(prev => ({
-        ...prev,
-        [gatheredResource.resourceName]: (prev[gatheredResource.resourceName] || 0) + 1
+  function gatherMaterial(method: GatheringMethod) {
+    const resource = gatheringResources.find(res => res.gatheringMethod === method)
+    if (resource) {
+      setInventory(prevInventory => ({
+        ...prevInventory,
+        [resource.resourceName]: (prevInventory[resource.resourceName] || 0) + resource.baseGatherRate
       }))
-      console.log(`Gathered ${gatheredResource.resourceName}. This would be recorded on the blockchain.`)
-    }
-    setActiveGathering(null)
-  }
-
-  const getTierColor = (tier: ItemTier) => {
-    switch (tier) {
-      case ItemTier.Tier1: return 'bg-gray-700 text-gray-300'
-      case ItemTier.Tier2: return 'bg-gray-600 text-teal-300'
-      case ItemTier.Tier3: return 'bg-gray-500 text-blue-300'
-      case ItemTier.Tier4: return 'bg-gray-400 text-purple-300'
-      case ItemTier.Tier5: return 'bg-gray-300 text-yellow-500'
-      case ItemTier.Tier6: return 'bg-gray-200 text-pink-500'
-      case ItemTier.Tier7: return 'bg-gray-100 text-indigo-500'
-      case ItemTier.Tier8: return 'bg-white text-cyan-500'
-      default: return 'bg-gray-700 text-gray-300'
     }
   }
 
-  if (isLoading) {
-    return <div className={`text-center ${darkFantasyStyles.text}`}>Loading gathering resources...</div>
+  function startGathering(method: GatheringMethod) {
+    setActiveGathering(method)
+    setProgress(0)
   }
 
   return (
-    <div className={`space-y-8 ${darkFantasyStyles.background} ${darkFantasyStyles.text}`}>
-      <div className="text-center">
-        <h1 className={`text-4xl font-bold mb-4 ${darkFantasyStyles.heading}`}>
-          Gathering Grounds
-        </h1>
-        <p className="text-xl mb-8">Harvest resources from the mystical lands of our realm</p>
-      </div>
-
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as GatheringMethod)} className="w-full">
-        <TabsList className={`grid w-full grid-cols-5 ${darkFantasyStyles.card} ${darkFantasyStyles.glowBorder}`}>
+    <div className="container mx-auto p-4 bg-gray-900 text-white">
+      <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        Gathering
+      </h1>
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-5 bg-gray-800">
           {GATHERING_TYPES.map((type) => (
-            <TabsTrigger 
-              key={type.name} 
-              value={type.name} 
+            <TabsTrigger
+              key={type.name}
+              value={type.name}
               className={`${darkFantasyStyles.text} ${darkFantasyStyles.accentHover} transition-colors`}
             >
               {type.icon}
@@ -178,7 +148,7 @@ export default function Gather() {
                             <h3 className={`text-lg font-semibold mb-2 ${darkFantasyStyles.accent}`}>{tier} Resources</h3>
                             <div className="flex flex-wrap gap-2">
                               {resources.map((resource) => (
-                                <Badge key={resource.resourceName} variant="secondary" className={`${getTierColor(resource.tier)} text-xs`}>
+                                <Badge key={resource.resourceName} variant="secondary" className="text-xs">
                                   {resource.resourceName}
                                 </Badge>
                               ))}

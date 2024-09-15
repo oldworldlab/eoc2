@@ -96,7 +96,7 @@ export default function QuestsPage() {
               <h3 className="text-2xl font-semibold text-yellow-500 mb-4">{selectedQuest.name}</h3>
               <p className="text-yellow-200 mb-2">{selectedQuest.objective}</p>
               <h4 className="text-lg font-semibold text-yellow-500 mb-2">Description</h4>
-              <p className="text-gray-300 mb-4 whitespace-pre-line">{selectedQuest.description}</p>
+              <p className="text-gray-300 mb-4 whitespace-pre-line">It&apos;s a great day</p>
               <h4 className="text-lg font-semibold text-yellow-500 mb-2">Rewards</h4>
               <p className="text-gray-300">You will receive: {selectedQuest.reward}</p>
             </div>
