@@ -1,4 +1,5 @@
 import DarkFantasyLayout from '@/components/DarkFantasyLayout';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import '@/styles/globals.css';
 
 export default function RootLayout({
@@ -9,9 +10,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DarkFantasyLayout>
-          {children}
-        </DarkFantasyLayout>
+        <ErrorBoundary>
+          <DarkFantasyLayout>
+            {children}
+          </DarkFantasyLayout>
+        </ErrorBoundary>
       </body>
     </html>
   );

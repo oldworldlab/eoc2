@@ -1,6 +1,8 @@
 import React from 'react';
-import HeaderComponent from './components-header';
-import Footer from './Footer';
+import dynamic from 'next/dynamic';
+import Footer from '@/components/Footer';
+
+const HeaderComponent = dynamic(() => import('@/components/components-header'), { ssr: false });
 
 export const darkFantasyStyles = {
   background: "bg-gray-900",
