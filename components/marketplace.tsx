@@ -3,11 +3,14 @@
 import { Search, Diamond, Hammer, Scroll, Swords, User } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Select } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import Image from 'next/image'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from 'react'
 
 export function Marketplace() {
+  const [selectedValue, setSelectedValue] = useState<string>('')
+
   return (
     <div className="min-h-screen bg-[#0a0e17] text-gray-100 font-sans">
       <header className="border-b border-[#1a1f2e] p-4">
@@ -63,10 +66,15 @@ export function Marketplace() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
           <div className="bg-[#1a1f2e] border-[#2a2f3e] text-gray-100 w-full">
-            <Select>
-              <option>Recommended for you</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
+            <Select value={selectedValue} onValueChange={setSelectedValue}>
+              <SelectTrigger className="w-full bg-[#1a1f2e] border-[#2a2f3e]">
+                <SelectValue placeholder="Select item" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="recommended">Recommended for you</SelectItem>
+                <SelectItem value="low-to-high">Price: Low to High</SelectItem>
+                <SelectItem value="high-to-low">Price: High to Low</SelectItem>
+              </SelectContent>
             </Select>
           </div>
         </div>
@@ -105,13 +113,13 @@ export function Marketplace() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2">Item Type</h3>
-                <Select className="w-full bg-[#1a1f2e] border-[#2a2f3e]">
+                <select className="w-full bg-[#1a1f2e] border-[#2a2f3e]">
                   <option>All Types</option>
                   <option>Weapons</option>
                   <option>Armor</option>
                   <option>Accessories</option>
                   <option>Consumables</option>
-                </Select>
+                </select>
               </div>
             </div>
           </div>

@@ -22,3 +22,7 @@ export enum WeaponType {
   Staff = 'Staff',
   Dagger = 'Dagger',
 }
+
+export type ArmorMaterial = 'Cloth' | 'Leather' | 'Mail' | 'Plate';
+
+export type ArmorPart = 'Head' | 'Chest' | 'Legs' | 'Feet' | 'Hands';

@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { 
-  Diamond, Trees, Wheat, Scissors, Flask, Pickaxe, 
+  Diamond, Trees, Wheat, Scissors, /* Flask, */ Pickaxe, 
   Download, Play, RotateCcw, Info, Sword, Shield, 
   Heart, Zap, Brain, Feather, Wallet, Settings, LogOut
 } from 'lucide-react'
@@ -91,7 +91,7 @@ export default function UserProfile() {
               Gather
             </Button>
             <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
-              <Flask className="mr-2 h-4 w-4" />
+              <Scissors className="mr-2 h-4 w-4" />
               Crafting
             </Button>
             <Button variant="ghost" className="text-gray-300 hover:text-[#ffd700]">
