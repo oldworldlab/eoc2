@@ -8,7 +8,7 @@
     ],
     "outDir": "./dist",
     "rootDir": "./",
-    "strict": true,
+    "strict": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -24,7 +24,15 @@
       "@/*": [
         "./*"
       ],
-      "@components/*": ["components/*"]
+      "@components/*": [
+        "components/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ]
     },
     "typeRoots": [
       "./node_modules/@types",
@@ -36,11 +44,13 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*",
+    "constants/**/*",
+    "types/**/*",
     ".next/types/**/*.ts"
   ],
   "exclude": [

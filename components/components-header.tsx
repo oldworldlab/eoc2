@@ -34,11 +34,13 @@ export default function HeaderComponent() {
     <header className="p-4 flex justify-between items-center bg-gray-900">
       <div className="flex items-center">
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/parallelao_secret_shop_logo_with_transparent_background_for_web_7a100720-0f57-43e0-99fb-19005bc2f0f7-removebg-preview-ra5HtqZGEFU2MOJwZGdUF9ocEosI5c.png"
+          src="/images/secret-shop-logo.png"
           alt="Secret Shop Logo"
           width={100}
           height={100}
           className="mr-2"
+          loading="eager"
+          priority
         />
       </div>
       <nav className="space-x-4">

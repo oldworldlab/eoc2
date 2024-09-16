@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { ItemTier } from "../constants/item-tiers";
-import { ItemType, ArmorType, WeaponType } from "../types/item-types";
+import { ItemTier } from "../../constants/item-tiers";  // Note the change here
+import { ItemType, ArmorType, WeaponType } from "../../types/item-types";  // Note the change here
 
 @Entity()
 export class CraftingRecipe {

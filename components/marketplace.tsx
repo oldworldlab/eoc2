@@ -17,7 +17,7 @@ export function Marketplace() {
         <nav className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-8">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/parallelao_secret_shop_logo_with_transparent_background_for_web_7a100720-0f57-43e0-99fb-19005bc2f0f7-removebg-preview-ra5HtqZGEFU2MOJwZGdUF9ocEosI5c.png"
+              src="/images/parallelao_secret_shop_logo_with_transparent_background_for_web_7a100720-0f57-43e0-99fb-19005bc2f0f7-removebg-preview-ra5HtqZGEFU2MOJwZGdUF9ocEosI5c.png"
               alt="Secret Shop Logo"
               width={100}
               height={100}
@@ -127,7 +127,7 @@ export function Marketplace() {
             <div className="grid grid-cols-4 gap-4">
               {[...Array(16)].map((_, i) => (
                 <div key={i} className="bg-[#1a1f2e] p-4 rounded-lg border border-[#2a2f3e] hover:border-[#ffd700] transition-colors">
-                  <Image src={`/placeholder.svg?height=100&width=100`} alt="Item" className="w-full h-40 object-cover mb-4 rounded" width={100} height={100} />
+                  <Image src="/images/parallelao_a_bustling_city_center_in_an_mmorpg_where_many_diffe_4ba298c2-cadf-40b3-82a8-8f57c876ae85-rY7gbhLFlZAQSnHUyW6Pj64yvXJLcR.png" alt="Item" className="w-full h-40 object-cover mb-4 rounded" width={100} height={100} />
                   <h3 className="text-lg font-semibold mb-2">Mystic Artifact</h3>
                   <p className="text-gray-400 mb-2">Rare | Accessory</p>
                   <div className="flex justify-between items-center">

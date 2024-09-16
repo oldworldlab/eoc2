@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { ItemTier } from "../constants/item-tiers";
+import { ItemTier } from "../../constants/item-tiers";  // Note the change here
 
 @Entity()
 export class Component {
@@ -10,7 +10,7 @@ export class Component {
   name!: string;
 
   @Column({
-    type: "simple-enum",
+    type: "enum",
     enum: ItemTier,
   })
   tier!: ItemTier;

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { ItemTier } from "../constants/item-tiers";
+import { ItemTier } from "@constants/item-tiers";
 import { GatheringMethod } from "../types/gathering-methods";
 
 @Entity()

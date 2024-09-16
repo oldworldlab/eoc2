@@ -25,19 +25,18 @@ export const DataService = {
 
 const gatheringResources: GatheringResource[] = [
   {
-    resourceName: 'Cloth',
-    gatheringMethod: 'Harvesting',
-    locations: ['Fields of Serenity', 'Meadows of Dawn'],
-  },
-  {
-    resourceName: 'Leather',
-    gatheringMethod: 'Skinning',
-    locations: ['Forest of Beasts', 'Savannah Plains'],
-  },
-  {
     resourceName: 'Iron Ore',
     gatheringMethod: 'Mining',
     locations: ['Iron Hills', 'Caverns of Might'],
+    tier: 1,
+    baseGatherRate: 10,
   },
-  // Add more resources here...
+  {
+    resourceName: 'Oak Wood',
+    gatheringMethod: 'Woodcutting',
+    locations: ['Ancient Forest', 'Dark Woods'],
+    tier: 1,
+    baseGatherRate: 8,
+  },
+  // Add more resources as needed
 ];

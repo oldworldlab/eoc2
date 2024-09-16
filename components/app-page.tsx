@@ -9,9 +9,9 @@ import Image from 'next/image'
 
 export function Page() {
   const featuredItems = [
-    { id: 1, name: 'Excalibur', type: 'Weapon', price: 1000, image: '/placeholder.svg?height=100&width=100' },
-    { id: 2, name: 'Dragon Scale Armor', type: 'Armor', price: 1500, image: '/placeholder.svg?height=100&width=100' },
-    { id: 3, name: 'Elixir of Life', type: 'Potion', price: 500, image: '/placeholder.svg?height=100&width=100' },
+    { id: 1, name: 'Excalibur', type: 'Weapon', price: 1000, image: '/images/parallelao_a_bustling_marketplace_in_an_mmorpg_where_many_diffe_4337648c-6134-4140-83e8-7205c0c4ed94-QcruRQJlGSCHGjCg66cb7MQzNiA2NZ.png' },
+    { id: 2, name: 'Dragon Scale Armor', type: 'Armor', price: 1500, image: '/images/parallelao_Create_an_icon_for_crafting_in_a_dark_fantasy_style._3aa7cc3c-c6c9-404b-9a9f-20d52da825be-canDAiKR3HX7ewGoYcT50m6mtKBpeh.png' },
+    { id: 3, name: 'Elixir of Life', type: 'Potion', price: 500, image: '/images/parallelao_a_bustling_crafting_center_in_an_mmorpg_where_many_d_cee1ff27-8626-4a14-8bbf-826d944f15ae-X8QSgbRs5cojaZbMlXIFApox9e21zt.png' },
   ]
 
   return (

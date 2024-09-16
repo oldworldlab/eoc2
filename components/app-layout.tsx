@@ -2,7 +2,7 @@
 
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'  // Note the uppercase 'H'
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer'  // Change this line
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
