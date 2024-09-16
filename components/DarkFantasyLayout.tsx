@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import HeaderComponent from './components-header';
 import Footer from './Footer';
 
 export const darkFantasyStyles = {
@@ -20,7 +20,7 @@ interface DarkFantasyLayoutProps {
 export default function DarkFantasyLayout({ children }: DarkFantasyLayoutProps) {
   return (
     <div className={`min-h-screen ${darkFantasyStyles.background} ${darkFantasyStyles.text} flex flex-col`}>
-      <Header />
+      <HeaderComponent />
       <main className="container mx-auto p-8 flex-grow">
         {children}
       </main>
